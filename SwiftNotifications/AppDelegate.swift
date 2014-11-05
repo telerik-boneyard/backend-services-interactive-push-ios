@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Everlive.setApplicationKey("2F8S7Yl58Sj1xADa")
+        Everlive.setApplicationKey( NSBundle.mainBundle().objectForInfoDictionaryKey("EverliveAPIKey") as String)
         
         // create notification actions
         var firstAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction() 
