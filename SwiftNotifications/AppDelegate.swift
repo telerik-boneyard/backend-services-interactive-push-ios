@@ -11,38 +11,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        
-    }
-    
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-
-    }
-    
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Everlive.setDeviceToken(deviceToken)
-
-        Everlive.sharedInstance().registerDevice { (success: Bool, error : NSError!) -> Void in
-            // handle the success and error here
-        }
-    }
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Everlive.setApplicationKey("SET-YOUR-API-KEY-HERE")
+        Everlive.setApplicationKey("2F8S7Yl58Sj1xADa")
         
         // create notification actions
         var firstAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction() 
         firstAction.identifier = "FIRST_ACTION"
         firstAction.title = "First Action"
         firstAction.activationMode = UIUserNotificationActivationMode.Foreground
-        firstAction.destructive = true
+        firstAction.destructive = false
         firstAction.authenticationRequired = false
         
         var secondAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
         secondAction.identifier = "SECOND_ACTION"
         secondAction.title = "Second Action"
         secondAction.activationMode = UIUserNotificationActivationMode.Foreground
-        secondAction.destructive = false
+        secondAction.destructive = true
         secondAction.authenticationRequired = false
         
         var thirdAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
@@ -55,10 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // group the actions within categories
         // the actions will be displayed when a notification is received for this category
         var myCategory:UIMutableUserNotificationCategory = UIMutableUserNotificationCategory()
-        myCategory.identifier = "FIRST_CATEGORY"
+        myCategory.identifier = "MY_CATEGORY"
         
         var defaultActions:NSArray = [firstAction, secondAction, thirdAction] // will be shown in a alert style notification as options
-        var minimalActions:NSArray = [thirdAction, firstAction] // will be shown in the lock screen and in the banner
+        var minimalActions:NSArray = [firstAction, secondAction] // will be shown in the lock screen and in the banner
         
         // set the minimum actions in regard to the different contexts in which the notification is displayed
         myCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
@@ -77,23 +61,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
-
-    // Notifications handler
-   
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        println("Registration:%@", error);
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        Everlive.setDeviceToken(deviceToken)
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
+        var notification:NSDictionary = userInfo.objectForKey("aps") as NSDictionary
+        // let Everlive to handle push notification without category
+        if notification.objectForKey("category") == nil {
+            Everlive.handlePush(userInfo)
+        }
+    }
+    
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
         
-        if(identifier == "FIRST_ACTION") {
-            NSNotificationCenter.defaultCenter().postNotificationName("firstActionTapped", object:nil )
-        } else if(identifier == "SECOND_ACTION"){
-            NSNotificationCenter.defaultCenter().postNotificationName("secondActionTapped", object: nil)
-        } else if(identifier == "THIRD_ACTION"){
-            NSNotificationCenter.defaultCenter().postNotificationName("thirdActionTapped", object: nil)
-        }
+        self.handlePushWithIdentifier(identifier!)
         
         // calling the completion handler is mandatory
         completionHandler()
     }
     
+    func handlePushWithIdentifier(identifier : String){
+        println(identifier)
+        if(identifier == "FIRST_ACTION"){
+            
+        } else if(identifier == "SECOND_ACTION"){
+            
+        }  else if(identifier == "THIRD_ACTION"){
+            
+        }
+    }
+
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -117,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-
+   
 
 }
 

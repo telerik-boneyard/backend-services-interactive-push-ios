@@ -8,25 +8,34 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        // We are posting the actions to the notification centre - add event observer
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"showAMessage", name: "firstActionTapped", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"showAMessage", name: "secondActionTapped", object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector:"showAMessage", name: "thirdActionTapped", object: nil)
-    }
-
-    func showAMessage(){
-        var alertMessageController:UIAlertController = UIAlertController(title: "Push Sample App", message: "Hello push notifications", preferredStyle: UIAlertControllerStyle.Alert)
+    @IBOutlet weak var infoLabel: UILabel!
+    
+    @IBAction func register(sender: UIButton) {
         
-        alertMessageController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        var customParams : Dictionary<String, String> = ["City" : "Palo Alto"];
         
-        self.presentViewController(alertMessageController, animated: true, completion: nil)
+        Everlive.sharedInstance().registerDeviceWithParameters(customParams , block: { (success: Bool, error : NSError!) -> Void in
+            
+            if((error) != nil){
+                self.infoLabel.text = error.localizedDescription
+            } else {
+                self.infoLabel.text = "Your device is now registered and ready to receive push notifications."
+            }
+        })
     }
+    
+    @IBAction func unregister(sender: UIButton) {
+        Everlive.sharedInstance().removeDevice { (success:Bool, error:NSError!) -> Void in
+            if((error) != nil){
+                self.infoLabel.text = error.localizedDescription
+            } else {
+                self.infoLabel.text = "You have unregistered your device"
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
