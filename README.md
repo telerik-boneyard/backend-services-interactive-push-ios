@@ -1,7 +1,5 @@
-backend-services-interactive-push-ios
-=====================================
-
 Interactive Push Notifications Sample with Telerik Backend Services
+=====================================
 
 This application is a basic example of using Interactive Push Notifications provided by Telerik Backend Services.
 
