@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1CC7D31A5ECF3500FEAD0B /* EverliveSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E1CC7D21A5ECF3400FEAD0B /* EverliveSDK.framework */; };
 		0E5F34B11A0A221400AFE5D8 /* logo-telerik_devcloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5F34AF1A0A221400AFE5D8 /* logo-telerik_devcloud.png */; };
 		0E5F34B21A0A221400AFE5D8 /* logo-telerik_devcloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5F34B01A0A221400AFE5D8 /* logo-telerik_devcloud@2x.png */; };
 		0E5F34B41A0A22E300AFE5D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E5F34B31A0A22E300AFE5D8 /* Main.storyboard */; };
-		43E5FA8C1A093BF00025CA42 /* EverliveSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E5FA8B1A093BF00025CA42 /* EverliveSDK.framework */; };
 		EAA73F8319CDE64C00FF9AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA73F8219CDE64C00FF9AC8 /* AppDelegate.swift */; };
 		EAA73F8519CDE64C00FF9AC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA73F8419CDE64C00FF9AC8 /* ViewController.swift */; };
 		EAA73F8A19CDE64C00FF9AC8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAA73F8919CDE64C00FF9AC8 /* Images.xcassets */; };
@@ -29,11 +29,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E1CC7D21A5ECF3400FEAD0B /* EverliveSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EverliveSDK.framework; sourceTree = "<group>"; };
 		0E5F34AF1A0A221400AFE5D8 /* logo-telerik_devcloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-telerik_devcloud.png"; sourceTree = "<group>"; };
 		0E5F34B01A0A221400AFE5D8 /* logo-telerik_devcloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-telerik_devcloud@2x.png"; sourceTree = "<group>"; };
 		0E5F34B31A0A22E300AFE5D8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		43CB12C11A03E0FC004FD6DD /* EverliveBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EverliveBridge.h; sourceTree = "<group>"; };
-		43E5FA8B1A093BF00025CA42 /* EverliveSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EverliveSDK.framework; sourceTree = "<group>"; };
 		EAA73F7D19CDE64C00FF9AC8 /* SwiftNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAA73F8119CDE64C00FF9AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EAA73F8219CDE64C00FF9AC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43E5FA8C1A093BF00025CA42 /* EverliveSDK.framework in Frameworks */,
+				0E1CC7D31A5ECF3500FEAD0B /* EverliveSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,7 +67,7 @@
 		EAA73F7419CDE64B00FF9AC8 = {
 			isa = PBXGroup;
 			children = (
-				43E5FA8B1A093BF00025CA42 /* EverliveSDK.framework */,
+				0E1CC7D21A5ECF3400FEAD0B /* EverliveSDK.framework */,
 				43CB12C11A03E0FC004FD6DD /* EverliveBridge.h */,
 				EAA73F7F19CDE64C00FF9AC8 /* SwiftNotifications */,
 				EAA73F9519CDE64D00FF9AC8 /* SwiftNotificationsTests */,
@@ -356,6 +356,7 @@
 				INFOPLIST_FILE = SwiftNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = EverliveBridge.h;
@@ -377,6 +378,7 @@
 				INFOPLIST_FILE = SwiftNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = EverliveBridge.h;
