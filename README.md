@@ -6,6 +6,7 @@
 * [Requirements](#requirements)
 * [Configuration](#configuration)
 * [Running the Sample](#running-the-sample)
+* [Test the Sample](#test-the-sample)
 * [See Also](#see-also)
 
 ## Overview
