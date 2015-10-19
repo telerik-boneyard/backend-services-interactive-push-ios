@@ -1,6 +1,6 @@
 # Interactive Push Notifications Sample for iOS
 
-<a href="https://github.com/telerik/backend-services-interactive-push-ios" target="_blank"><img style="padding-left:20px" src="http://docs.telerik.com/platform/appbuilder/sample-apps/images/get-github.png" alt="Get from GitHub" title="Get from GitHub"></a>
+<a href="https://github.com/telerik/backend-services-interactive-push-ios" target="_blank"><img style="padding-left:20px" src="http://docs.telerik.com/platform/samples/images/get-github.png" alt="Get from GitHub" title="Get from GitHub"></a>
 
 * [Overview](#overview)
 * [Requirements](#requirements)
