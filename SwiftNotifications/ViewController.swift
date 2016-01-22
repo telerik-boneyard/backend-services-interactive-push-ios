@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBAction func register(sender: UIButton) {
         
-        var customParams : Dictionary<String, String> = ["City" : "Palo Alto"];
+        let customParams : Dictionary<String, String> = ["City" : "Palo Alto"];
         
         Everlive.sharedInstance().registerDeviceWithParameters(customParams , block: { (success: Bool, error : NSError!) -> Void in
             

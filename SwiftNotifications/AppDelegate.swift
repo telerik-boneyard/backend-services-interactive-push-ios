@@ -13,24 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        Everlive.setApplicationKey("YOUR_API_KEY")
+        Everlive.setApplicationId("YOUR_APP_ID")
         
         // create notification actions
-        var firstAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction() 
+        let firstAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction() 
         firstAction.identifier = "FIRST_ACTION"
         firstAction.title = "First Action"
         firstAction.activationMode = UIUserNotificationActivationMode.Foreground
         firstAction.destructive = false
         firstAction.authenticationRequired = false
         
-        var secondAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
+        let secondAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
         secondAction.identifier = "SECOND_ACTION"
         secondAction.title = "Second Action"
         secondAction.activationMode = UIUserNotificationActivationMode.Foreground
         secondAction.destructive = true
         secondAction.authenticationRequired = false
         
-        var thirdAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
+        let thirdAction:UIMutableUserNotificationAction = UIMutableUserNotificationAction();
         thirdAction.identifier = "THIRD_ACTION"
         thirdAction.title = "Third Action"
         thirdAction.activationMode = UIUserNotificationActivationMode.Background 
@@ -39,21 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // group the actions within categories
         // the actions will be displayed when a notification is received for this category
-        var myCategory:UIMutableUserNotificationCategory = UIMutableUserNotificationCategory()
+        let myCategory:UIMutableUserNotificationCategory = UIMutableUserNotificationCategory()
         myCategory.identifier = "MY_CATEGORY"
         
-        var defaultActions:NSArray = [firstAction, secondAction, thirdAction] // will be shown in a alert style notification as options
-        var minimalActions:NSArray = [firstAction, secondAction] // will be shown in the lock screen and in the banner
+        let defaultActions:NSArray = [firstAction, secondAction, thirdAction] // will be shown in a alert style notification as options
+        let minimalActions:NSArray = [firstAction, secondAction] // will be shown in the lock screen and in the banner
         
         // set the minimum actions in regard to the different contexts in which the notification is displayed
-        myCategory.setActions(defaultActions, forContext: UIUserNotificationActionContext.Default)
-        myCategory.setActions(minimalActions, forContext: UIUserNotificationActionContext.Minimal)
+        myCategory.setActions(defaultActions as? [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Default)
+        myCategory.setActions(minimalActions as? [UIUserNotificationAction], forContext: UIUserNotificationActionContext.Minimal)
         
         let categories:NSSet = NSSet(object: myCategory)
         
         // settings for user notifications
-        let notificationTypes:UIUserNotificationType = UIUserNotificationType.Alert | UIUserNotificationType.Badge
-        let notificationSettings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categories)
+        let notificationTypes:UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge]
+        let notificationSettings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categories as? Set<UIUserNotificationCategory>)
         
 		// register for remote notifications
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings);
@@ -64,18 +64,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        println("Registration:%@", error);
+        print("Registration:%@", error);
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         Everlive.setDeviceToken(deviceToken)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary) {
-        var notification:NSDictionary = userInfo.objectForKey("aps") as NSDictionary
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+        let userInfoDictionary:NSDictionary = userInfo as NSDictionary
+        let notification:NSDictionary = userInfoDictionary.objectForKey("aps") as! NSDictionary
         // let Everlive to handle push notification without category
         if notification.objectForKey("category") == nil {
-            Everlive.handlePush(userInfo)
+            Everlive.handlePush(userInfo as [NSObject : AnyObject])
         }
     }
     
@@ -88,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func handlePushWithIdentifier(identifier : String){
-        println(identifier)
+        print(identifier)
         if(identifier == "FIRST_ACTION"){
             
         } else if(identifier == "SECOND_ACTION"){
