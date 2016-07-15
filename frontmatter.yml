@@ -5,3 +5,4 @@ publish: true
 page_title: Interactive Push Notifications Sample App for iOS | Telerik Platform
 description: A native iOS mobile app that demonstrates how to implement interactive push notifications.
 tags: Sample App, Application, iOS, Objective-C, Swift, iPhone, iPad, BaaS, mBaaS, Social, Analytics, Social Login
+repo_kind: "iOS Native"
